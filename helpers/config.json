@@ -1,0 +1,4 @@
+﻿{
+  "connectionString": "mongodb://localhost/Meals",
+  "secret": "Key-Secret 123456"
+}

@@ -1,9 +1,10 @@
-var mongoose = require("mongoose");
-const dotenv = require('dotenv')
+var mongoose = require('mongoose');
+const dotenv = require('dotenv');
+var config = require('./config.json');
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || config.connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
@@ -13,5 +14,5 @@ mongoose.connect(process.env.MONGODB_URI, {
 mongoose.Promise = global.Promise;
 
 module.exports = {
-    Orders: require('../orders/orders.model'.ORDERS)
+    Orders: require('../orders/orders.model').ORDERS
 };

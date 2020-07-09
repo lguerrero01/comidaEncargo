@@ -1,13 +1,20 @@
 const createError = require('http-errors');
 const express = require('express');
-const mongoose = require('mongoose')
 const app = express();
 const dotenv = require('dotenv')
 const router = express.Router();
-
+var bodyParser = require("body-parser");
 
 dotenv.config();
-// mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+app.use(bodyParser.urlencoded({
+  limit: "150mb",
+  extended: false
+}));
+
+app.use(bodyParser.json({
+  limit: "150mb"
+}));
 
 //rutas 
 
