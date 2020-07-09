@@ -6,7 +6,7 @@ module.exports = router;
 
 //rutas orders get
 router.get('/getOrders', getOrders);
-router.get('/getOrder/:id', getOrders);
+router.get('/getOrder/:id', getOrder);
 
 //rutas orders post
 router.post('/addOrder', addOrder);
@@ -43,7 +43,7 @@ function editOrder(req, res, next) {
 }
 
 function deleteOrder(req, res, next) {
-    ORDER_SERVICE.editOrder(req.params.id)
+    ORDER_SERVICE.deleteOrder(req.params.id)
         .then(() => res.json({}))
         .catch((err) => next(err));
 }

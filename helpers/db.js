@@ -14,5 +14,7 @@ mongoose.connect(process.env.MONGODB_URI || config.connectionString, {
 mongoose.Promise = global.Promise;
 
 module.exports = {
-    Orders: require('../orders/orders.model').ORDERS
+    Orders: require('../orders/orders.model').ORDERS,
+    Meals: require('../meals/meals.model').MEALS
+
 };
