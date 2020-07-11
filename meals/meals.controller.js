@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const MEALS_SERVICE = require('./meals.service');
+module.exports = router;
 
 
 

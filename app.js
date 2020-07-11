@@ -1,11 +1,14 @@
 const createError = require('http-errors');
 const express = require('express');
 const app = express();
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+var cors = require("cors");
+
 const router = express.Router();
 var bodyParser = require("body-parser");
 
 dotenv.config();
+app.use(cors());
 
 app.use(bodyParser.urlencoded({
   limit: "150mb",
