@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const MEALS_SERVICE = require('./meals.service');
+const isAuthenticated = require('../helpers/jwt')
 
 
 
@@ -9,7 +10,7 @@ router.get('/getMeals', getMeals);
 router.get('/getMeal/:id', getMeal);
 
 //rutas meals post
-router.post('/addMeal', addMeal);
+router.post('/addMeal', isAuthenticated.isAuthenticated, addMeal);
 
 //rutas meals put
 router.put('/editMeal/:id', editMeal);

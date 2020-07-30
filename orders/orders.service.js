@@ -24,6 +24,7 @@ async function addOrder(atributes) {
     try {
         const NEW_ORDER = new COLLECTION_ORDERS(atributes);
         await NEW_ORDER.save();
+        return NEW_ORDER;
     } catch (error) {
         throw error;
     }

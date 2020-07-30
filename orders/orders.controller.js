@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ORDER_SERVICE = require('./orders.service');
+const { isAuthenticated, hasRole } = require('../helpers/jwt')
+
 module.exports = router;
 
 
@@ -9,13 +11,13 @@ router.get('/getOrders', getOrders);
 router.get('/getOrder/:id', getOrder);
 
 //rutas orders post
-router.post('/addOrder', addOrder);
+router.post('/addOrder', isAuthenticated, addOrder);
 
 //rutas orders put
-router.put('/editOrder/:id', editOrder);
+router.put('/editOrder/:id', isAuthenticated, editOrder);
 
 //rutas order delete 
-router.delete('/deleteOrder/:id', deleteOrder);
+router.delete('/deleteOrder/:id', isAuthenticated, deleteOrder);
 
 
 function getOrders(req, res, next) {
@@ -32,7 +34,7 @@ function getOrder(req, res, next) {
 
 function addOrder(req, res, next) {
     ORDER_SERVICE.addOrder(req.body)
-        .then(() => res.json({}))
+        .then((x) => res.json(x))
         .catch((err) => next(err));
 }
 

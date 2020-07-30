@@ -4,7 +4,9 @@ const app = express();
 const dotenv = require('dotenv')
 const router = express.Router();
 var bodyParser = require("body-parser");
+const cors = require('cors');
 
+app.use(cors());
 dotenv.config();
 
 app.use(bodyParser.urlencoded({
@@ -16,11 +18,17 @@ app.use(bodyParser.json({
   limit: "150mb"
 }));
 
+// use JWT auth to secure the api
+
+// api routes
 //rutas 
 
 app.use('/api', require("./orders/orders.controller"));
 
 app.use('/api', require("./meals/meals.controller"));
+
+app.use('/api/auth', require("./Users/users.controller"));
+
 
 app.listen(3000, () => console.log("escuchando en puerto 3000"))
 
@@ -37,7 +45,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send('error');
 });
 
 module.exports = app;
