@@ -23,7 +23,8 @@ function createUser(req, res, next) {
 }
 
 function loginUser(req, res, next) {
-    authService.loginUser(req.body)
+    // console.log(req.body)
+    AUTH_SERVICE.loginUser(req.body)
         .then((data) => res.json(data))
         .catch((err) => next(err));
 }
