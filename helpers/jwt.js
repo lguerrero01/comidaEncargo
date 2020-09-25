@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const { Users } = require('./db')
+const config = require('./config.json');
 
+const secret = config.secret;
 
 
 const isAuthenticated = (req, res, next) => {
@@ -8,7 +10,7 @@ const isAuthenticated = (req, res, next) => {
     if (!token) {
         return res.sendStatus(403)
     }
-    jwt.verify(token, 'my-secret', (err, decoded) => {
+    jwt.verify(token, secret, (err, decoded) => {
         const { _id } = decoded
         Users.findOne({ _id }).exec()
             .then(user => {

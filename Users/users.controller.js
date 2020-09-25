@@ -11,6 +11,7 @@ router.post('/login', loginUser);
 router.get('/me', isAuthenticated.isAuthenticated, getUser);
 
 function getUser() {
+    console.log("hola desde get user")
     AUTH_SERVICE.getUser()
         .then((users) => res.json(users))
         .catch((err) => next(err));

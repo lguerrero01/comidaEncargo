@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+mongoose.set('useCreateIndex', true);
 
-const usersSchema = new Schema({
+const userSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -12,14 +13,20 @@ const usersSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    },
-    role: {
-        type: String,
-        default: 'user'
     }
-})
+    // ,
+    // role: {
+    //     type: String,
+    //     default: 'user'
+    // }
+}, {
+    timestamps: true //guarda fecha de cracion y de actualizacion
+});
 
-const Users = mongoose.model('Users', usersSchema);
+userSchema.set('toJSON', {
+    virtuals: true
+});
+const Users = mongoose.model('Users', userSchema);
 
 module.exports = {
     Users

@@ -1,8 +1,8 @@
-const DB = require('../helpers/db');
+var DB = require('../helpers/db');
 // const crypto = require('crypto')
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const config = require('../config.json');
+const config = require('../helpers/config.json');
 
 var Users = DB.Users;
 const SECRET_KEY = config.secret;
@@ -16,13 +16,18 @@ module.exports = {
 async function createUser(datos) {
     const newUser = {
         email: datos.email,
-        password: bcrypt.hashSync(datos.password)
+        password: bcrypt.hashSync(datos.password),
     }
 
     const user = new Users(newUser);
+
+
+
     let data = {};
+
     try {
         await user.save();
+
         const expiresIn = 24 * 60 * 60;
         const accessToken = jwt.sign({
             id: user.id
@@ -30,10 +35,11 @@ async function createUser(datos) {
             SECRET_KEY, {
             expiresIn: expiresIn
         });
+
         const dataUser = {
             email: user.email,
             accessToken: accessToken,
-            expiresIn: expiresIn
+            expiresIn: expiresIn,
         }
         // response 
 
@@ -101,7 +107,9 @@ async function getById(userId) {
 }
 
 
-
+// async function getUsers() {
+//     return await Users.find();
+// }
 
 
 
